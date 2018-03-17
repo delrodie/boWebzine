@@ -1,0 +1,69 @@
+{% extends 'backend_layout.html.twig' %}
+
+{% block title %}Liste des utilisateurs{% endblock %}
+
+{% block body %}
+    <div class="main-content">
+        <div class="page-title">
+            <h4 class="mb-0">
+                Gestion des utilisateurs
+                <small> </small>
+            </h4>
+            <ol class="breadcrumb mb-0 pl-0 pt-1 pb-0">
+                <li class="breadcrumb-item"><a href="{{ path('homepage') }}" class="default-color">Accueil</a></li>
+                <li class="breadcrumb-item active">Liste des utilisateurs</li>
+            </ol>
+        </div>
+
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-12 text-right">
+                    <a href="{{ path('user_new') }}" class="btn  btn-light"><i class="fa fa-plus"></i> Ajouter un utilisateur</a>
+                </div>
+                <br>
+                <div class="col-md-12">
+                    <div class="card card-shadow mb-4">
+                        <div class="card-header">
+                            <div class="card-title">
+                                Liste des utilisateurs
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <table class="table">
+                                <thead>
+                                <tr>
+                                    <th scope="col" class="text-center">#ID</th>
+                                    <th scope="col" class="text-center">Utilisateurs</th>
+                                    <th scope="col" class="text-center">Emails</th>
+                                    <th scope="col" class="text-center">Statut</th>
+                                    <th scope="col" class="text-center">Actions</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {% for user in users %}
+                                    <tr>
+                                        <th scope="col" class="text-right">{{ loop.index }}</th>
+                                        <td>{{ user.username }}</td>
+                                        <td>{{ user.email }}</td>
+                                        <td class="text-center">
+                                            {% if (user.isActive) %}
+                                                <span class="badge badge-pill badge-success">Active</span>
+                                            {% else %}
+                                                <span class="badge badge-pill badge-danger">Désactivé</span>
+                                            {% endif %}
+                                        </td>
+                                        <td class="text-center">
+                                            <a href="{{ path('user_edit', {'id': user.id}) }}"><i class="fa fa-edit"></i></a> |
+                                            <a href="{{ path('user_delete', {'id': user.id}) }}" onclick="return(confirm('Etes-vous sûr de vouloir supprimer {{ user.username }} ?'));"><i class="fa fa-trash-o"></i></a>
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="Delrodie AMOIKON">
+
+    <!--favicon icon-->
+    <link rel="icon" type="image/png" href="backend/img/favicon.html">
+
+    <title>
+        {% block title %}
+            TOURSDIVOIRE:: Tableau de bord
+        {% endblock %}
+    </title>
+
+    <!--google font-->
+    {% block stylesheets %}
+        <link href="http://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" rel="stylesheet">
+
+        <link href="{{ asset('backend/vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
+        <link href="{{ asset('backend/vendor/lobicard/css/lobicard.css') }}" rel="stylesheet">
+        <link href="{{ asset('backend/vendor/font-awesome/css/font-awesome.min.css') }}" rel="stylesheet">
+        <link href="{{ asset('backend/vendor/simple-line-icons/css/simple-line-icons.css') }}" rel="stylesheet">
+        <link href="{{ asset('backend/vendor/themify-icons/css/themify-icons.css') }}" rel="stylesheet">
+        <link href="{{ asset('backend/vendor/weather-icons/css/weather-icons.min.css') }}" rel="stylesheet">
+
+        <link href="{{ asset('backend/css/main.min.css') }}" rel="stylesheet">
+    {% endblock %}
+
+</head>
+<body class="app header-fixed left-sidebar-light left-sidebar-fixed right-sidebar-fixed right-sidebar-overlay right-sidebar-hidden">
+
+<!--===========header start===========-->
+<header class="app-header navbar bg-dark text-light">
+
+    <!--brand start-->
+    <div class="navbar-brand bg-dark">
+        <a class="" href="#">
+            <img src="backend/img/logo.png" srcset="backend/img/logo@2x.png 2x" alt="">
+        </a>
+    </div>
+    <!--brand end-->
+
+    <!--left side nav toggle start-->
+    <ul class="nav navbar-nav mr-auto">
+        <li class="nav-item d-lg-none">
+            <button class="navbar-toggler mobile-leftside-toggler" type="button"><i class="ti-align-right"></i></button>
+        </li>
+        <li class="nav-item d-md-down-none">
+            <a class="nav-link navbar-toggler left-sidebar-toggler" href="#"><i class=" ti-align-right"></i></a>
+        </li>
+    </ul>
+    <!--left side nav toggle end-->
+
+    <!--right side nav start-->
+    <ul class="nav navbar-nav ml-auto">
+
+
+        <li class="nav-item dropdown dropdown-slide d-md-down-none">
+            <a class="nav-link" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+                <i class="ti-bell"></i>
+                <span class="badge badge-danger notification-alarm"> </span>
+            </a>
+            <div class="dropdown-menu dropdown-menu-right">
+
+                <div class="dropdown-header pb-3">
+                    <strong>You have 6 Notifications</strong>
+                </div>
+
+                <a href="#" class="dropdown-item">
+                    <i class="icon-basket-loaded text-primary"></i> New order
+                </a>
+                <a href="#" class="dropdown-item">
+                    <i class="icon-user-follow text-success"></i> New registered member
+                </a>
+                <a href="#" class="dropdown-item">
+                    <i class=" icon-layers text-danger"></i> Server error report
+                </a>
+                <a href="#" class="dropdown-item">
+                    <i class=" icon-note text-warning"></i> Database report
+                </a>
+
+                <a href="#" class="dropdown-item">
+                    <i class=" icon-present text-info"></i> Order confirmation
+                </a>
+
+            </div>
+        </li>
+
+        <li class="nav-item dropdown dropdown-slide">
+            <a class="nav-link nav-pill user-avatar" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+                <img src="backend/img/user.png" alt="John Doe">
+            </a>
+            <div class="dropdown-menu dropdown-menu-right dropdown-menu-accout">
+                <div class="dropdown-header pb-3">
+                    <div class="media d-user">
+                        <img class="align-self-center mr-3" src="backend/img/user.png" alt="John Doe">
+                        <div class="media-body">
+                            <h5 class="mt-0 mb-0">John Doe</h5>
+                            <span>john@gmail.com</span>
+                        </div>
+                    </div>
+                </div>
+
+                <a class="dropdown-item" href="#"><i class=" ti-reload"></i> Activity</a>
+                <a class="dropdown-item" href="#"><i class=" ti-email"></i> Message</a>
+                <a class="dropdown-item" href="#"><i class=" ti-user"></i> Profile</a>
+                <a class="dropdown-item" href="#"><i class=" ti-layers-alt"></i> Projects <span class="badge badge-primary">4</span> </a>
+
+                <div class="dropdown-divider"></div>
+
+                <a class="dropdown-item" href="#"><i class=" ti-lock"></i> Lock Account</a>
+                <a class="dropdown-item" href="#"><i class=" ti-unlock"></i> Logout</a>
+            </div>
+        </li>
+
+        <!--right side toggler-->
+        <li class="nav-item d-lg-none">
+            <button class="navbar-toggler mobile-rightside-toggler" type="button"><i class="icon-options-vertical"></i></button>
+        </li>
+        <li class="nav-item d-md-down-none">
+            <a class="nav-link navbar-toggler right-sidebar-toggler" href="#"><i class="icon-options-vertical"></i></a>
+        </li>
+    </ul>
+
+    <!--right side nav end-->
+</header>
+<!--===========header end===========-->
+
+<!--===========app body start===========-->
+<div class="app-body">
+
+    <!--left sidebar start-->
+    <div class="left-sidebar">
+        <nav class="sidebar-menu">
+            <ul id="nav-accordion">
+                <li class="sub-menu">
+                    <a href="javascript:;" class="active">
+                        <i class=" ti-home"></i>
+                        <span>Tableau de bord</span>
+                    </a>
+                    <ul class="sub">
+                        <li><a  href="#">Actualités</a></li>
+                        <li><a  href="#">Statistiques</a></li>
+                    </ul>
+                </li>
+
+                <li class="nav-title">
+                    <h5 class="text-uppercase">Rubriques</h5>
+                </li>
+
+                <li class="sub-menu">
+                    <a href="javascript:;">
+                        <i class=" ti-layers"></i>
+                        <span>Rubriques</span>
+                    </a>
+                    <ul class="sub">
+                        <li><a  href="#">Article</a></li>
+                        <li><a  href="#">Media</a></li>
+                        <li><a  href="#">Commentaires</a></li>
+                        <li><a  href="#">Localités</a></li>
+                    </ul>
+                </li>
+
+
+                <li class="sub-menu">
+                    <a href="javascript:;">
+                        <i class=" ti-layout"></i>
+                        <span>Administration</span>
+                    </a>
+                    <ul class="sub">
+                        <li><a  href="#">Zone</a></li>
+                        <li><a  href="#">Rubrique</a></li>
+                        <li><a  href="#">Sécurity</a></li>
+                    </ul>
+                </li>
+
+            </ul>
+        </nav>
+    </div>
+    <!--left sidebar end-->
+
+    <!--main contents start-->
+    {% block body %}
+        
+    {% endblock %}
+
+    <!--main contents end-->
+
+</div>
+<!--===========app body end===========-->
+
+<!--===========footer start===========-->
+<footer class="app-footer">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-8">
+                2018 © Toursdivoire
+            </div>
+            <div class="col-4">
+                <a href="#" class="float-right back-top">
+                    <i class=" ti-arrow-circle-up"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</footer>
+<!--===========footer end===========-->
+
+
+{% block javascripts %}
+    <script src="{{ asset('backend/vendor/jquery/jquery.min.js') }}"></script>
+    <script src="{{ asset('backend/vendor/jquery-ui-1.12.1/jquery-ui.min.js') }}"></script>
+    <script src="{{ asset('backend/vendor/popper.min.js') }}"></script>
+    <script src="{{ asset('backend/vendor/bootstrap/js/bootstrap.min.js') }}"></script>
+    <script src="{{ asset('backend/vendor/jquery-ui-touch/jquery.ui.touch-punch-improved.js') }}"></script>
+    <script src="{{ asset('backend/vendor/lobicard/js/lobicard.js') }}"></script>
+    <script class="include" type="text/javascript" src="{{ asset('backend/vendor/jquery.dcjqaccordion.2.7.js') }}"></script>
+    <script src="{{ asset('backend/vendor/jquery.scrollTo.min.js') }}"></script>
+
+    <!--init scripts-->
+    <script src="{{ asset('backend/js/scripts.min.js') }}"></script>
+{% endblock %}
+
+
+</body>
+
+</html>

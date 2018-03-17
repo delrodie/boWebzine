@@ -1,0 +1,39 @@
+{% extends 'backend_layout.html.twig' %}
+
+{% block title %}Enregistrement des utilisateurs{% endblock %}
+
+{% block body %}
+    <div class="main-content">
+        <div class="page-title">
+            <h4 class="mb-0">
+                Gestion des utilisateurs
+                <small> </small>
+            </h4>
+            <ol class="breadcrumb mb-0 pl-0 pt-1 pb-0">
+                <li class="breadcrumb-item"><a href="{{ path('homepage') }}" class="default-color">Accueil</a></li>
+                <li class="breadcrumb-item active">Enregistrement des utilisateurs</li>
+            </ol>
+        </div>
+
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-12 text-right">
+                    <a href="{{ path('user_index') }}" class="btn  btn-light"><i class="fa fa-list"></i> Liste des utilisateurs</a>
+                </div>
+                <br>
+                <div class="col-md-12">
+                    <div class="card card-shadow mb-4">
+                        <div class="card-header">
+                            <div class="card-title">
+                                Enregistrement des utilisateurs
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            {{ include('user/_form.html.twig') }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

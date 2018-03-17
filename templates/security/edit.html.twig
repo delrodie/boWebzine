@@ -1,0 +1,50 @@
+{% extends "security/layout.html.twig" %}
+
+{% block title %}
+    Enregistrement
+{% endblock %}
+
+{% block body %}
+    {{ form_start(form, {'attr': {'id': "signinForm", 'class': "form-signin rounded"}}) }}
+        <a href="#" class="brand text-center">
+            <img src="assets/img/logo-dark.png" srcset="assets/img/logo-dark@2x.png 2x" alt=""/>
+        </a>
+        <h2 class="form-signin-heading">S'inscrire</h2>
+
+        <div class="form-group">
+            {{ form_widget(form.username, {'attr': {'class': 'form-control form-control-pill', 'placeholder': "Login"}}) }}
+        </div>
+
+        <div class="form-group">
+            {{ form_widget(form.email, {'attr': {'class': 'form-control form-control-pill', 'placeholder': "Email"}}) }}
+        </div>
+
+        <div class="form-group">
+            {{ form_widget(form.plainPassword.first, {'attr': {'class': 'form-control form-control-pill', 'placeholder': 'Mot depasse'}}) }}
+        </div>
+
+        <div class="form-group">
+            {{ form_widget(form.plainPassword.second, {'attr': {'class': 'form-control form-control-pill', 'placeholder': 'Repeter le mot de passer'}}) }}
+        </div>
+
+        <div class="checkbox mb-4 mt-4">
+            <label class="custom-control custom-checkbox">
+                {{ form_widget(form.termsAccepted, {'attr': {'class': 'custom-control-input'}}) }}
+                <span class="custom-control-indicator"></span>
+                <span class="custom-control-description">
+                        J'accepte les conditions.
+                    </span>
+            </label>
+        </div>
+        {{ form_rest(form) }}
+        <div class="form-group ">
+            <button type="submit" class="btn btn-lg btn-pill btn-block btn-primary" name="signup" value="Sign up">S'inscrire</button>
+        </div>
+        <div class="mt-4">
+                <span>
+                    Avez-vous déjà un compte ?
+                </span>
+            <a href="{{ path('login') }}" class="text-primary">Connexion</a>
+        </div>
+    {{ form_end(form) }}
+{% endblock %}
