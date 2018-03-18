@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Post;
 use App\Form\PostType;
 use App\Repository\PostRepository;
+use App\Utils\Utilities;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -26,7 +27,7 @@ class PostController extends Controller
     /**
      * @Route("/new", name="post_new", methods="GET|POST")
      */
-    public function new(Request $request): Response
+    public function new(Request $request, Utilities $utilities): Response
     {
         $post = new Post();
         $form = $this->createForm(PostType::class, $post);
@@ -34,6 +35,13 @@ class PostController extends Controller
 
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
+            $slug = $utilities->slugify($post->getTitre());
+            $user = $this->getUser()->getUsername();
+            $resume = $utilities->resume($post->getContenu(), 300, '...', true);
+            $post->setPubliePar($user);
+            $post->setSlug($slug);
+            $post->setResume($resume); //dump($post);die();
+
             $em->persist($post);
             $em->flush();
 
@@ -47,7 +55,7 @@ class PostController extends Controller
     }
 
     /**
-     * @Route("/{id}", name="post_show", methods="GET")
+     * @Route("/{slug}", name="post_show", methods="GET")
      */
     public function show(Post $post): Response
     {
@@ -55,17 +63,24 @@ class PostController extends Controller
     }
 
     /**
-     * @Route("/{id}/edit", name="post_edit", methods="GET|POST")
+     * @Route("/{slug}/edit", name="post_edit", methods="GET|POST")
      */
-    public function edit(Request $request, Post $post): Response
+    public function edit(Request $request, Post $post, Utilities $utilities): Response
     {
         $form = $this->createForm(PostType::class, $post);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $slug = $utilities->slugify($post->getTitre());
+            $user = $this->getUser()->getUsername();
+            $resume = $utilities->resume($post->getContenu(), 300, '...', true);
+            $post->setModifiePar($user);
+            $post->setSlug($slug);
+            $post->setResume($resume);
+
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('post_edit', ['id' => $post->getId()]);
+            return $this->redirectToRoute('post_show', ['slug' => $post->getSlug()]);
         }
 
         return $this->render('post/edit.html.twig', [
