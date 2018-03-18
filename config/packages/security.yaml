@@ -61,4 +61,4 @@ security:
         - { path: ^/article, roles: ROLE_USER }
         - { path: ^/localite, roles: ROLE_USER }
         - { path: ^/admin, roles: ROLE_ADMIN }
-        - { path: ^/user, roles: ROLE_SUPER_ADMIN }
+        - { path: ^/admin/user, roles: ROLE_SUPER_ADMIN }
