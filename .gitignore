@@ -11,3 +11,4 @@
 ###< symfony/web-server-bundle ###
 
 /public/upload/
+/src/Migrations/
