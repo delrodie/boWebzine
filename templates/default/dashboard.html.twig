@@ -1,9 +1,41 @@
-{% extends "base.html.twig" %}
+{% extends "backend_layout.html.twig" %}
 
 {% block title %}
     Tableau de bord
 {% endblock %}
 
 {% block body %}
-    <h1>tableau de bord</h1>
+<div class="main-content">
+    <div class="page-title">
+        <h4 class="mb-0">
+            Tableau de bord
+            <small> </small>
+        </h4>
+        <ol class="breadcrumb mb-0 pl-0 pt-1 pb-0">
+            <li class="breadcrumb-item"><a href="{{ path('backend') }}" class="default-color">Accueil</a></li>
+            <li class="breadcrumb-item active">Liste des catégories</li>
+        </ol>
+    </div>
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12 text-right">
+                <a href="{{ path('backend') }}" class="btn  btn-light"><i class="fa fa-plus"></i> Ajouter une catégorie</a>
+            </div>
+            <br>
+            <div class="col-md-12">
+                <div class="card card-shadow mb-4">
+                    <div class="card-header">
+                        <div class="card-title">
+                            Tableau de bord
+                        </div>
+                    </div>
+                    <div class="card-body">
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 {% endblock %}

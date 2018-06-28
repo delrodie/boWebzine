@@ -11,7 +11,7 @@
 
     <title>
         {% block title %}
-            TOURSDIVOIRE:: Tableau de bord
+            WEBZINE:: Tableau de bord
         {% endblock %}
     </title>
 
@@ -58,37 +58,6 @@
     <ul class="nav navbar-nav ml-auto">
 
 
-        <li class="nav-item dropdown dropdown-slide d-md-down-none">
-            <a class="nav-link" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
-                <i class="ti-bell"></i>
-                <span class="badge badge-danger notification-alarm"> </span>
-            </a>
-            <div class="dropdown-menu dropdown-menu-right">
-
-                <div class="dropdown-header pb-3">
-                    <strong>You have 6 Notifications</strong>
-                </div>
-
-                <a href="#" class="dropdown-item">
-                    <i class="icon-basket-loaded text-primary"></i> New order
-                </a>
-                <a href="#" class="dropdown-item">
-                    <i class="icon-user-follow text-success"></i> New registered member
-                </a>
-                <a href="#" class="dropdown-item">
-                    <i class=" icon-layers text-danger"></i> Server error report
-                </a>
-                <a href="#" class="dropdown-item">
-                    <i class=" icon-note text-warning"></i> Database report
-                </a>
-
-                <a href="#" class="dropdown-item">
-                    <i class=" icon-present text-info"></i> Order confirmation
-                </a>
-
-            </div>
-        </li>
-
         <li class="nav-item dropdown dropdown-slide">
             <a class="nav-link nav-pill user-avatar" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
                 <img src="backend/img/user.png" alt="John Doe">
@@ -98,21 +67,19 @@
                     <div class="media d-user">
                         <img class="align-self-center mr-3" src="backend/img/user.png" alt="John Doe">
                         <div class="media-body">
-                            <h5 class="mt-0 mb-0">John Doe</h5>
-                            <span>john@gmail.com</span>
+                            {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                            <h5 class="mt-0 mb-0">{{ app.user.username|title }}</h5>
+                            {% endif %}
                         </div>
                     </div>
                 </div>
 
-                <a class="dropdown-item" href="#"><i class=" ti-reload"></i> Activity</a>
-                <a class="dropdown-item" href="#"><i class=" ti-email"></i> Message</a>
-                <a class="dropdown-item" href="#"><i class=" ti-user"></i> Profile</a>
-                <a class="dropdown-item" href="#"><i class=" ti-layers-alt"></i> Projects <span class="badge badge-primary">4</span> </a>
+                <a class="dropdown-item" href="#"><i class=" ti-user"></i> Profil</a>
+                <a class="dropdown-item" href="#"><i class=" ti-layers-alt"></i> Articles <span class="badge badge-primary">4</span> </a>
 
                 <div class="dropdown-divider"></div>
 
-                <a class="dropdown-item" href="#"><i class=" ti-lock"></i> Lock Account</a>
-                <a class="dropdown-item" href="#"><i class=" ti-unlock"></i> Logout</a>
+                <a class="dropdown-item" href="{{ path('logout')}}"><i class=" ti-unlock"></i> Deconnexion</a>
             </div>
         </li>
 
@@ -142,7 +109,6 @@
                         <span>Tableau de bord</span>
                     </a>
                     <ul class="sub">
-                        <li><a  href="#">Actualités</a></li>
                         <li><a  href="#">Statistiques</a></li>
                     </ul>
                 </li>
@@ -154,13 +120,36 @@
                 <li class="sub-menu">
                     <a href="javascript:;">
                         <i class=" ti-layers"></i>
-                        <span>Rubriques</span>
+                        <span>Actualités</span>
                     </a>
                     <ul class="sub">
-                        <li><a  href="{{ path('post_index') }}">Article</a></li>
-                        <li><a  href="#">Media</a></li>
-                        <li><a  href="#">Commentaires</a></li>
-                        <li><a  href="#">Localités</a></li>
+                        <li><a  href="{{ path('post_index') }}">Infos</a></li>
+                        <li><a  href="#">Actualités</a></li>
+                    </ul>
+                </li>
+
+                <li class="sub-menu">
+                    <a href="javascript:;">
+                        <i class=" ti-layers"></i>
+                        <span>Treichville</span>
+                    </a>
+                    <ul class="sub">
+                        <li><a  href="{{ path('post_index') }}">Commune</a></li>
+                        <li><a  href="#">Mairie</a></li>
+                    </ul>
+                </li>
+
+                <li class="sub-menu">
+                    <a href="javascript:;">
+                        <i class=" ti-layers"></i>
+                        <span>Pages</span>
+                    </a>
+                    <ul class="sub">
+                        <li><a  href="{{ path('post_index') }}">Page</a></li>
+                        <li><a  href="#">Decouvertes</a></li>
+                        <li><a  href="#">Médias</a></li>
+                        <li><a  href="#">Annuaire</a></li>
+                        <li><a  href="#">Contact</a></li>
                     </ul>
                 </li>
 
@@ -171,8 +160,10 @@
                         <span>Administration</span>
                     </a>
                     <ul class="sub">
-                        <li><a  href="#">Zone</a></li>
-                        <li><a  href="#">Rubrique</a></li>
+                        <li><a  href="#">Catégorie</a></li>
+                        <li><a  href="#">Rubrique Commune</a></li>
+                        <li><a  href="#">Rubrique Mairie</a></li>
+                        <li><a  href="#">Type média</a></li>
                         <li><a  href="#">Sécurity</a></li>
                     </ul>
                 </li>
@@ -184,7 +175,7 @@
 
     <!--main contents start-->
     {% block body %}
-        
+
     {% endblock %}
 
     <!--main contents end-->
@@ -197,7 +188,7 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-8">
-                2018 © Toursdivoire
+                2018 © Backend
             </div>
             <div class="col-4">
                 <a href="#" class="float-right back-top">
