@@ -1,0 +1,75 @@
+{% extends "backend_layout.html.twig" %}
+
+{% block title %}
+    Liste des catégories
+{% endblock %}
+
+{% block body %}
+    <div class="main-content">
+        <div class="page-title">
+            <h4 class="mb-0">
+                Gestion des catégories
+                <small> </small>
+            </h4>
+            <ol class="breadcrumb mb-0 pl-0 pt-1 pb-0">
+                <li class="breadcrumb-item"><a href="{{ path('homepage') }}" class="default-color">Accueil</a></li>
+                <li class="breadcrumb-item active">Liste des catégories</li>
+            </ol>
+        </div>
+
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-12 text-right">
+                    <a href="{{ path('backend_categorie_new') }}" class="btn  btn-light"><i class="fa fa-plus"></i> Ajouter une catégorie</a>
+                </div>
+                <br>
+                <div class="col-md-12">
+                    <div class="card card-shadow mb-4">
+                        <div class="card-header">
+                            <div class="card-title">
+                                Liste des catégories
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <table class="table">
+                                <thead>
+                                <tr>
+                                    <th scope="col" class="text-center">#ID</th>
+                                    <th scope="col" class="text-center">Libelle</th>
+                                    <th scope="col" class="text-center">Statut</th>
+                                    <th scope="col" class="text-center">Actions</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {% for categorie in categories %}
+                                    <tr>
+                                        <th scope="col" class="text-right">{{ loop.index }}</th>
+                                        <td>{{ categorie.libelle }}</td>
+                                        <td class="text-center">
+                                            {% if (categorie.statut) %}
+                                                <span class="badge badge-pill badge-success">Active</span>
+                                            {% else %}
+                                                <span class="badge badge-pill badge-danger">Désactivée</span>
+                                            {% endif %}
+                                        </td>
+                                        <td class="text-center">
+                                            <a href="{{ path('backend_categorie_edit', {'id': categorie.id}) }}"><i class="fa fa-edit"></i></a> |
+                                            <a href="{{ path('backend_categorie_show', {'id': categorie.id}) }}" onclick="return(confirm('Etes-vous sûr de vouloir supprimer {{ categorie.libelle }} ?'));"><i class="fa fa-trash-o"></i></a>
+                                        </td>
+                                    </tr>
+                                {% else %}
+                                    <tr>
+                                      <td colspan="4">
+                                        <h2>Aucun enregistrement trouvé</h2>
+                                      </td>
+                                    </tr>
+                                {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

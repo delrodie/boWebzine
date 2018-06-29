@@ -60,12 +60,12 @@
 
         <li class="nav-item dropdown dropdown-slide">
             <a class="nav-link nav-pill user-avatar" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
-                <img src="backend/img/user.png" alt="John Doe">
+                <img src="{{ asset('backend/img/user.png')}}" alt="{% if is_granted('IS_AUTHENTICATED_FULLY') %}{{ app.user.username }}{% endif %}">
             </a>
             <div class="dropdown-menu dropdown-menu-right dropdown-menu-accout">
                 <div class="dropdown-header pb-3">
                     <div class="media d-user">
-                        <img class="align-self-center mr-3" src="backend/img/user.png" alt="John Doe">
+                        <img class="align-self-center mr-3" src="{{ asset('backend/img/user.png')}}" alt="">
                         <div class="media-body">
                             {% if is_granted('IS_AUTHENTICATED_FULLY') %}
                             <h5 class="mt-0 mb-0">{{ app.user.username|title }}</h5>
@@ -160,7 +160,7 @@
                         <span>Administration</span>
                     </a>
                     <ul class="sub">
-                        <li><a  href="#">Catégorie</a></li>
+                        <li><a  href="{{ path('backend_categorie_new')}}">Catégorie</a></li>
                         <li><a  href="#">Rubrique Commune</a></li>
                         <li><a  href="#">Rubrique Mairie</a></li>
                         <li><a  href="#">Type média</a></li>
