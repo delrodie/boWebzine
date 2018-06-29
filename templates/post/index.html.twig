@@ -1,41 +1,48 @@
-{% extends 'base.html.twig' %}
+{% extends 'backend_layout.html.twig' %}
 
-{% block title %}Post index{% endblock %}
+{% block title %}Liste des articles{% endblock %}
 
 {% block body %}
-    <h1>Post index</h1>
+    <main class="main-content">
+        <div class="page-title">
+            <h4 class="mb-0"> Gestion des articles
+                <small></small>
+            </h4>
+            <ol class="breadcrumb mb-0 pl-0 pt-1 pb-0">
+                <li class="breadcrumb-item"><a href="#" class="default-color">Accueil</a></li>
+                <li class="breadcrumb-item active">liste des articles</li>
+            </ol>
+        </div>
 
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Titre</th>
-                <th>Contenu</th>
-                <th>Tags</th>
-                <th>Statut</th>
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for post in posts %}
-            <tr>
-                <td>{{ post.id }}</td>
-                <td>{{ post.titre }}</td>
-                <td>{{ post.contenu }}</td>
-                <td>{{ post.tags }}</td>
-                <td>{{ post.statut ? 'Yes' : 'No' }}</td>
-                <td>
-                    <a href="{{ path('post_show', {'id': post.id}) }}">show</a>
-                    <a href="{{ path('post_edit', {'id': post.id}) }}">edit</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="6">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+        <div class="container-fluid">
 
-    <a href="{{ path('post_new') }}">Create new</a>
+
+            <div class="row mt-5 mb-3">
+                <div class="col-md-12 text-right">
+                    <a href="{{ path('post_new') }}" class="btn  btn-light"><i class="fa fa-plus"></i> Ajouter un article</a>
+                </div>
+                <br>
+            </div>
+
+            <div class="card-deck">
+                {% for post in posts %}
+                    <div class="col-md-4 col-sm-6">
+                        <div class="card mb-4">
+                            <img src="{{ vich_uploader_asset(post, 'imageFile') }}" alt="{{ post.titre }}" title="{{ post.titre }}"  class="card-img-top img-fluid"/>
+                            <div class="card-body">
+                                <h5 class="card-title">{{ post.titre }}</h5>
+                                <p class="card-text">{{ post.resume|raw }}</p>
+                                <a href="#" class="btn btn-outline-danger">Apperçu</a>
+                                <a href="{{ path('post_show', {'slug': post.slug}) }}" class="btn btn-outline-primary">> Lire la suite</a>
+                            </div>
+                            <div class="card-footer">
+                                <small class="text-muted">Publié le {{ post.publieLe|date('d-m-Y H:i:s') }} par {{ post.publiePar }}</small>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+
+        </div>
+    </main>
 {% endblock %}

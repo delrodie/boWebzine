@@ -104,6 +104,12 @@ class Post
     private $modifieLe;
 
     /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Categorie", inversedBy="posts")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $categorie;
+
+    /**
      * @return mixed
      */
     public function getId()
@@ -330,6 +336,18 @@ class Post
     public function setResume($resume)
     {
         $this->resume = $resume;
+    }
+
+    public function getCategorie(): ?Categorie
+    {
+        return $this->categorie;
+    }
+
+    public function setCategorie(?Categorie $categorie): self
+    {
+        $this->categorie = $categorie;
+
+        return $this;
     }
 
 }

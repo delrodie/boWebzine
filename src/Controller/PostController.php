@@ -12,7 +12,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * @Route("/article")
+ * @Route("/backend/article")
  */
 class PostController extends Controller
 {
@@ -45,7 +45,9 @@ class PostController extends Controller
             $em->persist($post);
             $em->flush();
 
-            return $this->redirectToRoute('post_index');
+            $this->addFlash('notice', 'Le post a été enregistré avec succès!');
+
+            return $this->redirectToRoute('post_show', ['slug' => $post->getSlug()]);
         }
 
         return $this->render('post/new.html.twig', [

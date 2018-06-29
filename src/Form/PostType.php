@@ -43,6 +43,11 @@ class PostType extends AbstractType
                 'allow_delete' => true,
                 'download_label' => 'Telecharger l\'illustration',
             ])
+            ->add('categorie', null, array(
+                'attr' => array(
+                    'class' => 'form-control select-categorie',
+                )
+            ))
         ;
     }
 
